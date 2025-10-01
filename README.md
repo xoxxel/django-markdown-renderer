@@ -1,7 +1,5 @@
 # Django Markdown Renderer
 
-# Django Markdown Renderer
-
 A Django application that provides a beautiful, real-time Markdown editor and renderer. Perfect for adding Markdown editing capabilities to your Django projects with minimal setup.
 
 ![Markdown Renderer Demo](screenshots/demo.png)
