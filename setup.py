@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="django-markdown-renderer",
-    version="0.1.0",
+    version="0.2.0",
     author="xoxxel",
     author_email="",
     description="A Django app for rendering Markdown with real-time preview",

@@ -103,6 +103,58 @@ console.log('Hello Markdown');
     const liveEl = document.getElementById("live");
     const statusEl = document.getElementById("status");
 
+    // Emoji picker logic
+    const emojiList = [
+      ':smile:', ':rocket:', ':heart:', ':thumbsup:', ':fire:', ':star:', ':100:', ':clap:', ':eyes:', ':wave:', ':tada:', ':thinking:', ':sunglasses:', ':cry:', ':grin:', ':wink:', ':ok_hand:', ':pray:', ':confetti_ball:', ':poop:', ':blush:', ':angry:', ':sleeping:', ':zzz:', ':no_mouth:', ':neutral_face:', ':joy:', ':sob:', ':facepalm:', ':muscle:', ':skull:', ':alien:', ':robot:', ':cat:', ':dog:', ':sun:', ':moon:', ':rainbow:', ':rose:', ':crown:', ':gift:', ':balloon:', ':cake:', ':coffee:', ':pizza:', ':soccer:', ':basketball:', ':car:', ':airplane:', ':phone:', ':computer:', ':moneybag:', ':gem:', ':warning:', ':checkered_flag:', ':medal:', ':trophy:'
+    ];
+    let emojiBox = null;
+    mdEl.addEventListener('input', function(e) {
+      const val = mdEl.value;
+      const pos = mdEl.selectionStart;
+      const before = val.slice(0, pos);
+      const match = before.match(/:(\w{2,})$/);
+      if (match) {
+        const query = match[1];
+        const filtered = emojiList.filter(e => e.includes(query));
+        if (filtered.length) {
+          if (!emojiBox) {
+            emojiBox = document.createElement('div');
+            emojiBox.style.position = 'absolute';
+            emojiBox.style.background = '#23283a';
+            emojiBox.style.color = '#e8ecf1';
+            emojiBox.style.border = '1px solid #5aa6ff';
+            emojiBox.style.borderRadius = '8px';
+            emojiBox.style.zIndex = 1000;
+            emojiBox.style.fontSize = '15px';
+            emojiBox.style.padding = '6px 10px';
+            emojiBox.style.maxHeight = '180px';
+            emojiBox.style.overflowY = 'auto';
+            document.body.appendChild(emojiBox);
+          }
+          const rect = mdEl.getBoundingClientRect();
+          emojiBox.style.left = (rect.left + 20) + 'px';
+          emojiBox.style.top = (rect.top + 40) + 'px';
+          emojiBox.innerHTML = filtered.map(e => `<div style='cursor:pointer;padding:2px 0' data-emoji='${e}'>${e}</div>`).join('');
+          emojiBox.querySelectorAll('div').forEach(div => {
+            div.onclick = function() {
+              const newVal = val.slice(0, pos - query.length - 1) + div.dataset.emoji + val.slice(pos);
+              mdEl.value = newVal;
+              mdEl.focus();
+              emojiBox.remove();
+              emojiBox = null;
+              renderNow();
+            };
+          });
+        } else if (emojiBox) {
+          emojiBox.remove();
+          emojiBox = null;
+        }
+      } else if (emojiBox) {
+        emojiBox.remove();
+        emojiBox = null;
+      }
+    });
+
     let timer = null;
     function setStatus(s){ statusEl.textContent = s; }
 
