@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <title>Markdown → HTML Renderer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline' 'self'; script-src 'unsafe-inline' 'self';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src *; media-src *; frame-src *; style-src 'unsafe-inline' 'self'; script-src 'unsafe-inline' 'self';" />
   <style>
     :root{--bg:#0f1115;--panel:#151824;--muted:#8d93a1;--text:#e8ecf1;--accent:#5aa6ff;}
     *{box-sizing:border-box}
@@ -24,9 +24,46 @@
     .preview h1,.preview h2,.preview h3{margin:.6em 0 .4em}
     .preview code{background:#0c1020;padding:2px 6px;border-radius:6px}
     .preview pre{background:#0c1020;padding:12px;border-radius:10px;overflow:auto;direction:ltr}
+    .preview blockquote {
+      border-left: 4px solid var(--accent);
+      background: #181c2a;
+      margin: 1em 0;
+      padding: 10px 18px;
+      color: #a3b1d1;
+      font-style: italic;
+    }
+    .preview table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+      background: #181c2a;
+      color: var(--text);
+    }
+    .preview th, .preview td {
+      border: 1px solid #23283a;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .preview th[align="right"], .preview td[align="right"] { text-align: right; }
+    .preview th[align="center"], .preview td[align="center"] { text-align: center; }
+    .preview th[align="left"], .preview td[align="left"] { text-align: left; }
+    .preview kbd {
+      background: #23283a;
+      border-radius: 6px;
+      border: 1px solid #5aa6ff;
+      padding: 2px 8px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #5aa6ff;
+      margin: 0 2px;
+      box-shadow: 0 1px 2px #0002;
+    }
     .status{font-size:12px;color:var(--muted);padding:0 4px}
     .row{display:flex;align-items:center;gap:.75rem}
-    @media (max-width: 960px){main{grid-template-columns:1fr;height:auto} .pane{min-height:40vh}}
+  @media (max-width: 960px){main{grid-template-columns:1fr;height:auto} .pane{min-height:40vh}}
+  .h_iframe-aparat_embed_frame{position:relative;}
+  .h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}
+  .h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
   </style>
 </head>
 <body>
