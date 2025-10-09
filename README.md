@@ -1,63 +1,60 @@
+
 # Django Markdown Renderer
 
-A Django application that provides a beautiful, real-time Markdown editor and renderer. Perfect for adding Markdown editing capabilities to your Django projects with minimal setup. Developed by xoxxel.
+**Django Markdown Renderer** is a lightweight package that brings secure, high-quality Markdown-to-HTML rendering to your Django projects. Instead of using heavy or complex editors, this package lets you easily add Markdown support for content creation, blogging, and any section where users need to write rich text—directly in your app.
+
+**Key benefits:**
+- Simple integration: Add Markdown editing and preview with minimal setup.
+- Secure by default: All HTML output is sanitized to prevent malicious code (using bleach).
+- High-quality content: Users can write Markdown and see beautiful, styled HTML instantly.
+- Perfect for content sections, blogs, documentation, and anywhere you need safe user-generated HTML.
+- No need for complex WYSIWYG editors—just Markdown!
+
+**Demo:**
+Below is a graphical demo showing the editor, supported classes, and the final HTML output. You can see exactly how your content will look and which Markdown/HTML features are available.
 
 ![Markdown Renderer Demo](screenshots/demo.png)
 
-## Installation
+## Installation & Usage
 
-### Installing the Package
-You can install `django-markdown-renderer` directly from PyPI:
+### Install from PyPI
+To use Django Markdown Renderer in your project, simply install the package:
 
 ```bash
 pip install django-markdown-renderer
 ```
 
-### Setting Up the Project
-If you prefer to work with the source code or contribute to the project, follow these steps:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/xoxxel/django-markdown-renderer.git
-   cd django-markdown-renderer
+### Quick Setup
+1. Add `'markdown_renderer'` to `INSTALLED_APPS` in your Django `settings.py`.
+2. Include the app URLs in your `urls.py`:
+   ```python
+   path('', include('markdown_renderer.urls')),
    ```
-
-2. **Create and Activate a Virtual Environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+3. (Optional) Create a `.env` file for Django settings:
    ```
-
-3. **Install Dependencies**:
-   The package requires Django and other dependencies listed in `requirements.txt`. Install them with:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Configure Environment Variables**:
-   Create a `.env` file in the project root with the following settings:
-   ```
+   SECRET_KEY=your-secret-key
    DEBUG=True
-
-   # Django Markdown Renderer
-
-   ```django
-
-   ![Markdown Renderer Demo](screenshots/demo.png)
-
-   ## Installation
-
+   ALLOWED_HOSTS=localhost,127.0.0.1
+   ```
+4. Run migrations:
    ```bash
-   pip install django-markdown-renderer
+   python manage.py migrate
+   ```
+5. Start the server:
+   ```bash
+   python manage.py runserver
    ```
 
-   ## Quick Start
-   1. Add `'markdown_renderer'` to `INSTALLED_APPS` in your Django `settings.py`.
-   2. Add app URLs to your `urls.py`:
-      ```python
-      path('', include('markdown_renderer.urls')),
-      ```
-   3. Create a `.env` file with:
+### Using the Source Code
+If you want to contribute or use the package as open source, clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/xoxxel/django-markdown-renderer.git
+cd django-markdown-renderer
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
       ```
       SECRET_KEY=your-secret-key
       DEBUG=True
